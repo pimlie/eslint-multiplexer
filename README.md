@@ -1,11 +1,11 @@
 # Multiplex eslint results and merge results for common files
-<!-- a href="https://travis-ci.org/pimlie/eslint-multiplexer"><img src="https://api.travis-ci.org/pimlie/eslint-multiplexer.svg" alt="Build Status"></a -->
+<a href="https://travis-ci.org/pimlie/eslint-multiplexer"><img src="https://api.travis-ci.org/pimlie/eslint-multiplexer.svg" alt="Build Status"></a>
 <!-- a href="https://ci.appveyor.com/project/pimlie/eslint-multiplexer"><img src="https://ci.appveyor.com/api/projects/status/l1hkfevo53tg0g9d?svg=true" alt="Windows Build Status"></a -->
-<!-- a href="https://codecov.io/gh/pimlie/eslint-multiplexer"><img src="https://img.shields.io/codecov/c/github/pimlie/eslint-multiplexer/master.svg" alt="Coverage Status"></a -->
+<a href="https://codecov.io/gh/pimlie/eslint-multiplexer"><img src="https://img.shields.io/codecov/c/github/pimlie/eslint-multiplexer/master.svg" alt="Coverage Status"></a>
 [![npm](https://img.shields.io/npm/dt/eslint-multiplexer.svg)](https://www.npmjs.com/package/eslint-multiplexer)
 [![npm (scoped with tag)](https://img.shields.io/npm/v/eslint-multiplexer/latest.svg)](https://www.npmjs.com/package/eslint-multiplexer)
 
-ESLint helper to combine results of multiple eslint results and then merge those results for common files to count message occurences.
+ESLint helper to combine multiple eslint results and then merge those results for common files to count message occurences.
 
 <p align="center"><img align="center" src="https://user-images.githubusercontent.com/1067403/46256342-b3ceed00-c4a9-11e8-9cfd-df6dafdd3146.png" /></p>
 
