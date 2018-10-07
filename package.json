@@ -1,0 +1,48 @@
+{
+  "name": "eslint-multiplexer",
+  "version": "1.0.0",
+  "description": "Combine multiple eslint results and merge results for common files",
+  "main": "lib/index.js",
+  "author": "pimlie",
+  "license": "MIT",
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "keywords": [
+    "eslint",
+    "eslint plugin",
+    "occurence",
+    "combine",
+    "merge",
+    "multiplex"
+  ],
+  "bugs": {
+    "url": "https://github.com/pimlie/eslint-multiplexer/issues"
+  },
+  "homepage": "https://github.com/pimlie/eslint-multiplexer",
+  "bin": {
+    "eslint-multiplexer": "./bin/eslint-multiplexer"
+  },
+  "scripts": {
+    "lint": "eslint bin/* lib test",
+    "test": "jest test/"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.6.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standard-jsx": "^6.0.2",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.24.1",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "minimist-options": "^3.0.2"
+  }
+}
