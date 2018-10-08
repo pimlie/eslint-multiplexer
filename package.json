@@ -33,7 +33,7 @@
   "scripts": {
     "coverage": "codecov",
     "lint": "eslint bin/* lib test",
-    "test": "nyc jest test/"
+    "test": "nyc jest test"
   },
   "engines": {
     "node": ">=8.0.0"

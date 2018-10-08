@@ -27,7 +27,7 @@ describe('cli', () => {
     const { stdout, stderr } = await spawnHelper([
       './bin/eslint-multiplexer',
       '--nopipe',
-      './node_modules/.bin/eslint',
+      'eslint',
       '--no-ignore', './test/fixtures'
     ])
 
@@ -41,7 +41,7 @@ describe('cli', () => {
       './bin/eslint-multiplexer',
       '--nopipe',
       '-b',
-      './node_modules/.bin/eslint',
+      'eslint',
       '--no-ignore', './test/fixtures'
     ])
 
@@ -56,7 +56,7 @@ describe('cli', () => {
       './bin/eslint-multiplexer',
       '--nopipe',
       '-m=',
-      './node_modules/.bin/eslint',
+      'eslint',
       '--no-ignore', './test/fixtures'
     ])
 
@@ -71,7 +71,7 @@ describe('cli', () => {
       './bin/eslint-multiplexer',
       '--nopipe',
       '-m', '([^./]+).js$',
-      './node_modules/.bin/eslint',
+      'eslint',
       '--no-ignore', './test/fixtures'
     ])
 
@@ -86,7 +86,7 @@ describe('cli', () => {
       './bin/eslint-multiplexer',
       '--nopipe',
       '-b', '-t', '0.6',
-      './node_modules/.bin/eslint',
+      'eslint',
       '--no-ignore', './test/fixtures'
     ])
 
@@ -101,7 +101,7 @@ describe('cli', () => {
       './bin/eslint-multiplexer',
       '--nopipe',
       '-b', '-t', '0.6', '-h',
-      './node_modules/.bin/eslint',
+      'eslint',
       '--no-ignore', './test/fixtures'
     ])
 
@@ -116,7 +116,7 @@ describe('cli', () => {
       './bin/eslint-multiplexer',
       '--nopipe',
       '-s',
-      './node_modules/.bin/eslint',
+      'eslint',
       '--no-ignore', './test/fixtures'
     ])
 
@@ -127,7 +127,7 @@ describe('cli', () => {
   test('stdin as input', async () => {
     const { stdout, stderr } = await new Promise((resolve) => {
       const eslint = spawn(process.execPath, [
-        './node_modules/.bin/eslint',
+        './node_modules/eslint/bin/eslint.js',
         '--no-ignore', './test/fixtures',
         '-f', 'json'
       ], { stdio: [ 'inherit', 'pipe', 'inherit' ] })
@@ -164,13 +164,13 @@ describe('cli', () => {
     const { stdout, stderr } = await new Promise((resolve) => {
       const eslint1 = spawn(process.execPath, [
         './bin/eslint-multiplexer',
-        './node_modules/.bin/eslint',
+        'eslint',
         '--no-ignore', './test/fixtures/index.js'
       ], { stdio: [ 'inherit', 'pipe', 'inherit' ] })
 
       const eslint2 = spawn(process.execPath, [
         './bin/eslint-multiplexer',
-        './node_modules/.bin/eslint',
+        'eslint',
         '--no-ignore', './test/fixtures/first/index.js'
       ], { stdio: [ 'pipe', 'pipe', 'inherit' ] })
 
