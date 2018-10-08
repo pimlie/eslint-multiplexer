@@ -27,6 +27,7 @@ test_script:
   # - npm --version
   - yarn --version
   # run tests
+  - yarn lint
   - yarn test
 
 # Don't actually build.
