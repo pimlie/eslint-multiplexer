@@ -83,6 +83,10 @@ if (cli.flags.help) {
         -h, --help             Displays this message
   `)
 } else {
-  const Multiplexer = require('..')
-  Multiplexer.run(cli)
+  try {
+    const Multiplexer = require('..')
+    Multiplexer.run(cli)
+  } catch (ex) {
+    console.error(ex.message)
+  }
 }

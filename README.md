@@ -25,13 +25,13 @@ $ eslint-multiplexer -b -i "<json-string-with-results>"
 ```
 
 #### Pipe from eslint
-If you pipe the results directly from eslint you have to use `json` as format
+If you pipe the results directly from eslint you have to specify `json` as the format
 ```
 $ eslint -f json lib1 lib2 lib3 | eslint-multiplexer [options]
 ```
 
 #### Prefix eslint
-Its not necessary to specify `json` as format when prefixing eslint
+Its not necessary to specify `json` as the format when prefixing eslint
 ```
 $ eslint-multiplexer eslint | eslint-multiplexer -b eslint
 ```
@@ -58,6 +58,11 @@ lib3/dist/v1.0/index.js
 and you wish to combine all the `index.js` files, use this regex:
 ```js
 (?:(lib)[0-9]+(\/))(?:[^\/]+\/)*([^./]+)\.js
+```
+
+then the common name for all three files will be 
+```
+lib/index.js
 ```
 
 ## Keep calm and carry on
@@ -107,7 +112,4 @@ Other formatters can be implemented quite easily, PR's are very welcome for that
 ```
 
 ## TODO
-- CI
-- Unit tests
-- Coverage
 - More formatters?

@@ -81,6 +81,21 @@ describe('cli', () => {
     expect(stdout).toEqual(expect.not.stringContaining('index.js'))
   })
 
+  test('below threshold', async () => {
+    const { stdout, stderr } = await spawn([
+      './bin/eslint-multiplexer',
+      '--nopipe',
+      '-b', '-t', '0.6',
+      './node_modules/.bin/eslint',
+      '--no-ignore', './test/fixtures'
+    ])
+
+    expect(stderr).toBe('')
+    expect(stdout).toEqual(expect.stringContaining('2x'))
+    expect(stdout).toEqual(expect.stringContaining('1x'))
+    expect(stdout).toEqual(expect.not.stringContaining('1 problem (1 error, 0 warnings)'))
+  })
+
   test('below threshold hidden', async () => {
     const { stdout, stderr } = await spawn([
       './bin/eslint-multiplexer',
@@ -93,6 +108,7 @@ describe('cli', () => {
     expect(stderr).toBe('')
     expect(stdout).toEqual(expect.stringContaining('2x'))
     expect(stdout).toEqual(expect.not.stringContaining('1x'))
+    expect(stdout).toEqual(expect.stringContaining('1 problem (1 error, 0 warnings)'))
   })
 
   test('show source', async () => {
