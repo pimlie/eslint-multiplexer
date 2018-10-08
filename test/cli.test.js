@@ -1,11 +1,11 @@
-const cp = require('child_process')
+const spawn = require('cross-spawn')
 
-const spawn = (args) => {
+const spawnHelper = (args) => {
   return new Promise((resolve) => {
     let stdout = ''
     let stderr = ''
 
-    const sp = cp.spawn(process.execPath, args, {
+    const sp = spawn(process.execPath, args, {
       stdio: ['ignore', 'pipe', 'pipe']
     })
 
@@ -24,7 +24,7 @@ const spawn = (args) => {
 
 describe('cli', () => {
   test('basic operation', async () => {
-    const { stdout, stderr } = await spawn([
+    const { stdout, stderr } = await spawnHelper([
       './bin/eslint-multiplexer',
       '--nopipe',
       './node_modules/.bin/eslint',
@@ -37,7 +37,7 @@ describe('cli', () => {
   })
 
   test('match basename', async () => {
-    const { stdout, stderr } = await spawn([
+    const { stdout, stderr } = await spawnHelper([
       './bin/eslint-multiplexer',
       '--nopipe',
       '-b',
@@ -52,7 +52,7 @@ describe('cli', () => {
   })
 
   test('match default regex', async () => {
-    const { stdout, stderr } = await spawn([
+    const { stdout, stderr } = await spawnHelper([
       './bin/eslint-multiplexer',
       '--nopipe',
       '-m=',
@@ -67,7 +67,7 @@ describe('cli', () => {
   })
 
   test('match custom regex', async () => {
-    const { stdout, stderr } = await spawn([
+    const { stdout, stderr } = await spawnHelper([
       './bin/eslint-multiplexer',
       '--nopipe',
       '-m', '([^./]+).js$',
@@ -82,7 +82,7 @@ describe('cli', () => {
   })
 
   test('below threshold', async () => {
-    const { stdout, stderr } = await spawn([
+    const { stdout, stderr } = await spawnHelper([
       './bin/eslint-multiplexer',
       '--nopipe',
       '-b', '-t', '0.6',
@@ -97,7 +97,7 @@ describe('cli', () => {
   })
 
   test('below threshold hidden', async () => {
-    const { stdout, stderr } = await spawn([
+    const { stdout, stderr } = await spawnHelper([
       './bin/eslint-multiplexer',
       '--nopipe',
       '-b', '-t', '0.6', '-h',
@@ -112,7 +112,7 @@ describe('cli', () => {
   })
 
   test('show source', async () => {
-    const { stdout, stderr } = await spawn([
+    const { stdout, stderr } = await spawnHelper([
       './bin/eslint-multiplexer',
       '--nopipe',
       '-s',
@@ -126,13 +126,13 @@ describe('cli', () => {
 
   test('stdin as input', async () => {
     const { stdout, stderr } = await new Promise((resolve) => {
-      const eslint = cp.spawn(process.execPath, [
+      const eslint = spawn(process.execPath, [
         './node_modules/.bin/eslint',
         '--no-ignore', './test/fixtures',
         '-f', 'json'
       ], { stdio: [ 'inherit', 'pipe', 'inherit' ] })
 
-      const multiplexer = cp.spawn(process.execPath, [
+      const multiplexer = spawn(process.execPath, [
         './bin/eslint-multiplexer',
         '--nopipe',
         '-b'
@@ -162,13 +162,13 @@ describe('cli', () => {
 
   test('multiple pipes', async () => {
     const { stdout, stderr } = await new Promise((resolve) => {
-      const eslint1 = cp.spawn(process.execPath, [
+      const eslint1 = spawn(process.execPath, [
         './bin/eslint-multiplexer',
         './node_modules/.bin/eslint',
         '--no-ignore', './test/fixtures/index.js'
       ], { stdio: [ 'inherit', 'pipe', 'inherit' ] })
 
-      const eslint2 = cp.spawn(process.execPath, [
+      const eslint2 = spawn(process.execPath, [
         './bin/eslint-multiplexer',
         './node_modules/.bin/eslint',
         '--no-ignore', './test/fixtures/first/index.js'
@@ -177,7 +177,7 @@ describe('cli', () => {
       eslint2.stdin.setEncoding('utf8')
       eslint1.stdout.pipe(eslint2.stdin)
 
-      const multiplexer = cp.spawn(process.execPath, [
+      const multiplexer = spawn(process.execPath, [
         './bin/eslint-multiplexer',
         '--nopipe',
         '-b', '--debug'
