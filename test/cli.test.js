@@ -253,7 +253,7 @@ describe('cli', () => {
       })
       multiplexer.stderr.on('data', (chunk) => {
         stderr += chunk
-     })
+      })
 
       let closedOrExited = false
       multiplexer.on('close', () => {
