@@ -67,10 +67,11 @@ describe('cli', () => {
   })
 
   test('match custom regex', async () => {
+    const esep = require('path').sep.replace('\\', '\\\\')
     const { stdout, stderr } = await spawnHelper([
       './bin/eslint-multiplexer',
       '--nopipe',
-      '-m', '([^./]+).js$',
+      '-m', `([^.${esep}]+).js$`,
       'eslint',
       '--no-ignore', './test/fixtures'
     ])
