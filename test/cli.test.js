@@ -1,5 +1,7 @@
-const esep = require('path').sep.replace('\\', '\\\\')
+const { sep } = require('path')
 const spawn = require('cross-spawn')
+
+const esep = sep.replace('\\', '\\\\')
 
 const spawnHelper = (args) => {
   return new Promise((resolve) => {
@@ -33,7 +35,7 @@ describe('cli', () => {
     ])
 
     expect(stderr).toBe('')
-    expect(stdout).toEqual(expect.stringContaining(`first${esep}index.js`))
+    expect(stdout).toEqual(expect.stringContaining(`first${sep}index.js`))
     expect(stdout).toEqual(expect.not.stringContaining('2x'))
   })
 
@@ -49,7 +51,7 @@ describe('cli', () => {
     expect(stderr).toBe('')
     expect(stdout).toEqual(expect.stringContaining('2x'))
     expect(stdout).toEqual(expect.stringContaining('index.js'))
-    expect(stdout).toEqual(expect.not.stringContaining(`first${esep}index.js`))
+    expect(stdout).toEqual(expect.not.stringContaining(`first${sep}index.js`))
   })
 
   test('match default regex', async () => {
@@ -64,7 +66,7 @@ describe('cli', () => {
     expect(stderr).toBe('')
     expect(stdout).toEqual(expect.stringContaining('2x'))
     expect(stdout).toEqual(expect.stringContaining('index.js'))
-    expect(stdout).toEqual(expect.not.stringContaining(`first${esep}index.js`))
+    expect(stdout).toEqual(expect.not.stringContaining(`first${sep}index.js`))
   })
 
   test('match custom regex', async () => {
