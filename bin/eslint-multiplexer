@@ -83,10 +83,11 @@ if (cli.flags.help) {
         -h, --help             Displays this message
   `)
 } else {
-  try {
-    const Multiplexer = require('..')
-    Multiplexer.run(cli)
-  } catch (ex) {
-    console.error(ex.message)
-  }
+  process.on('unhandledRejection', (reason) => {
+    console.error(reason.message)
+    process.exitCode = 1
+  })
+
+  const Multiplexer = require('..')
+  Multiplexer.run(cli)
 }

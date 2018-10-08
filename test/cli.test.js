@@ -208,4 +208,72 @@ describe('cli', () => {
     expect(stdout).toEqual(expect.stringContaining('1x'))
     expect(stdout).toEqual(expect.stringContaining('index.js'))
   })
+
+  test('use multiplex formatter with eslint', async () => {
+    const { stdout, stderr } = await new Promise((resolve) => {
+      const eslint = spawn(process.execPath, [
+        './node_modules/eslint/bin/eslint.js',
+        '--no-ignore', './test/fixtures',
+        '-f', './lib/formatters/stylish'
+      ], { stdio: [ 'inherit', 'pipe', 'pipe' ] })
+
+      let stdout = ''
+      let stderr = ''
+      eslint.stdout.on('data', (chunk) => {
+        stdout += chunk
+      })
+      eslint.stderr.on('data', (chunk) => {
+        stderr += chunk
+      })
+
+      eslint.on('close', () => {
+        resolve({ stdout, stderr })
+      })
+    })
+
+    expect(stderr).toBe('')
+    expect(stdout).toEqual(expect.stringContaining('1x'))
+    expect(stdout).toEqual(expect.not.stringContaining('2x'))
+    expect(stdout).toEqual(expect.stringContaining('index.js'))
+  })
+
+  test('invalid formatter gives error', async () => {
+    let exitCode = -1
+    const { stdout, stderr } = await new Promise((resolve) => {
+      const multiplexer = spawn(process.execPath, [
+        './bin/eslint-multiplexer',
+        '--nopipe',
+        '-f', 'does-not-exist'
+      ], { stdio: [ 'inherit', 'pipe', 'pipe' ] })
+
+      let stdout = ''
+      let stderr = ''
+      multiplexer.stdout.on('data', (chunk) => {
+        stdout += chunk
+      })
+      multiplexer.stderr.on('data', (chunk) => {
+        stderr += chunk
+     })
+
+      let closedOrExited = false
+      multiplexer.on('close', () => {
+        if (closedOrExited) {
+          resolve({ stdout, stderr })
+        }
+        closedOrExited = true
+      })
+
+      multiplexer.on('exit', (code, signal) => {
+        exitCode = code
+        if (closedOrExited) {
+          resolve({ stdout, stderr })
+        }
+        closedOrExited = true
+      })
+    })
+
+    expect(exitCode).toBe(1)
+    expect(stdout).toBe('')
+    expect(stderr).toEqual(expect.stringContaining('There was a problem loading formatter'))
+  })
 })
