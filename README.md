@@ -108,7 +108,7 @@ Other formatters can be implemented quite easily, PR's are very welcome for that
                                stylish)
         --hide, -h Boolean     Hide messages below the threshold
         --show-source, -s      Show the source of the message
-        -h, --help             Displays this message
+        --help                 Displays this message
 ```
 
 ## TODO

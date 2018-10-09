@@ -80,7 +80,7 @@ if (cli.flags.help) {
                                stylish)
         --hide, -h Boolean     Hide messages below the threshold
         --show-source, -s      Show the source of the message
-        -h, --help             Displays this message
+        --help                 Displays this message
   `)
 } else {
   process.on('unhandledRejection', (reason) => {
