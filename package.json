@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/pimlie/eslint-multiplexer#readme",
   "bin": {
-    "eslint-multiplexer": "./bin/eslint-multiplexer"
+    "eslint-multiplexer": "./bin/eslint-multiplexer.js"
   },
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
