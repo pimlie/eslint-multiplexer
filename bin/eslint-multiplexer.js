@@ -11,46 +11,37 @@ const options = buildOptions({
   },
   input: {
     type: 'string',
-    default: undefined,
     alias: 'i'
   },
   format: {
     type: 'string',
-    default: undefined,
     alias: 'f'
   },
   basename: {
     type: 'boolean',
-    default: undefined,
     alias: 'b'
   },
   matcher: {
     type: 'string',
-    default: undefined,
     alias: 'm'
   },
   threshold: {
     type: 'number',
-    default: undefined,
     alias: 't'
   },
   hideBelowThreshold: {
     type: 'boolean',
-    default: undefined,
     alias: ['h', 'hide']
   },
   showSource: {
     type: 'boolean',
-    default: undefined,
     alias: 's'
   },
   nopipe: {
-    type: 'boolean',
-    default: undefined
+    type: 'boolean'
   },
   debug: {
-    type: 'boolean',
-    default: undefined
+    type: 'boolean'
   }
 })
 
