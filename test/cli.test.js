@@ -47,7 +47,7 @@ describe('cli', () => {
       '--no-ignore', './test/fixtures'
     ])
 
-    expect(exitCode).toBe(0)
+    expect(exitCode).toBe(1)
     expect(stderr).toBe('')
     expect(stdout).toEqual(expect.stringContaining(`first${sep}index.js`))
     expect(stdout).toEqual(expect.not.stringContaining('2x'))
@@ -62,7 +62,7 @@ describe('cli', () => {
       '--no-ignore', './test/fixtures'
     ])
 
-    expect(exitCode).toBe(0)
+    expect(exitCode).toBe(1)
     expect(stderr).toBe('')
     expect(stdout).toEqual(expect.stringContaining('2x'))
     expect(stdout).toEqual(expect.stringContaining('index.js'))
@@ -78,7 +78,7 @@ describe('cli', () => {
       '--no-ignore', './test/fixtures'
     ])
 
-    expect(exitCode).toBe(0)
+    expect(exitCode).toBe(1)
     expect(stderr).toBe('')
     expect(stdout).toEqual(expect.stringContaining('2x'))
     expect(stdout).toEqual(expect.stringContaining('index.js'))
@@ -94,7 +94,7 @@ describe('cli', () => {
       '--no-ignore', './test/fixtures'
     ])
 
-    expect(exitCode).toBe(0)
+    expect(exitCode).toBe(1)
     expect(stderr).toBe('')
     expect(stdout).toEqual(expect.stringContaining('2x'))
     expect(stdout).toEqual(expect.stringContaining('index'))
@@ -110,7 +110,7 @@ describe('cli', () => {
       '--no-ignore', './test/fixtures'
     ])
 
-    expect(exitCode).toBe(0)
+    expect(exitCode).toBe(1)
     expect(stderr).toBe('')
     expect(stdout).toEqual(expect.stringContaining('2x'))
     expect(stdout).toEqual(expect.stringContaining('1x'))
@@ -126,7 +126,7 @@ describe('cli', () => {
       '--no-ignore', './test/fixtures'
     ])
 
-    expect(exitCode).toBe(0)
+    expect(exitCode).toBe(1)
     expect(stderr).toBe('')
     expect(stdout).toEqual(expect.stringContaining('2x'))
     expect(stdout).toEqual(expect.not.stringContaining('1x'))
@@ -142,7 +142,7 @@ describe('cli', () => {
       '--no-ignore', './test/fixtures'
     ])
 
-    expect(exitCode).toBe(0)
+    expect(exitCode).toBe(1)
     expect(stderr).toBe('')
     expect(stdout).toEqual(expect.stringContaining('0: function'))
   })
@@ -184,7 +184,7 @@ describe('cli', () => {
   })
 
   test('multiple pipes', async () => {
-    const { stdout, stderr } = await new Promise((resolve) => {
+    const { stdout, stderr, exitCode } = await new Promise((resolve) => {
       const eslint1 = spawn(process.execPath, [
         './bin/eslint-multiplexer',
         'eslint',
@@ -218,11 +218,25 @@ describe('cli', () => {
         stderr += chunk
       })
 
+      let exitCode
+      let closedOrExited
       multiplexer.on('close', () => {
-        resolve({ stdout, stderr })
+        if (closedOrExited) {
+          resolve({ stdout, stderr, exitCode })
+        }
+        closedOrExited = true
+      })
+
+      multiplexer.on('exit', (code, signal) => {
+        exitCode = code
+        if (closedOrExited) {
+          resolve({ stdout, stderr, exitCode })
+        }
+        closedOrExited = true
       })
     })
 
+    expect(exitCode).toBe(1)
     expect(stderr).toBe('')
     expect(stdout).toEqual(expect.stringContaining('2x'))
     expect(stdout).toEqual(expect.stringContaining('1x'))
@@ -253,5 +267,18 @@ describe('cli', () => {
     expect(exitCode).toBe(1)
     expect(stdout).toBe('')
     expect(stderr).toEqual(expect.stringContaining('There was a problem loading formatter'))
+  })
+
+  test('exists with 0 status when no errors ', async () => {
+    const { stdout, stderr, exitCode } = await spawnHelper([
+      './bin/eslint-multiplexer',
+      '--nopipe',
+      'eslint',
+      '--no-ignore', './test/fixtures/good.js'
+    ])
+
+    expect(exitCode).toBe(0)
+    expect(stderr).toBe('')
+    expect(stdout).toBe('')
   })
 })
