@@ -1,6 +1,13 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [2.0.0](https://github.com/pimlie/eslint-multiplexer/compare/v1.0.4...v2.0.0) (2019-08-24)
+
+
+### Features
+
+* use non-zero exit code when errors exists ([79f582e](https://github.com/pimlie/eslint-multiplexer/commit/79f582e))
 
 ## [1.0.4](https://github.com/pimlie/eslint-multiplexer/compare/v1.0.3...v1.0.4) (2019-03-21)
 

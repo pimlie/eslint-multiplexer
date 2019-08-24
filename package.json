@@ -1,6 +1,6 @@
 {
   "name": "eslint-multiplexer",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "Combine multiple eslint results and merge results for common files",
   "main": "lib/index.js",
   "author": "pimlie",
