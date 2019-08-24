@@ -47,7 +47,7 @@ const options = buildOptions({
 
 const args = minimist(process.argv.slice(2), options)
 const cli = {
-  input: args['_'],
+  input: args._,
   flags: args
 }
 

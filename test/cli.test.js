@@ -153,13 +153,13 @@ describe('cli', () => {
         './node_modules/eslint/bin/eslint.js',
         '--no-ignore', './test/fixtures',
         '-f', 'json'
-      ], { stdio: [ 'inherit', 'pipe', 'inherit' ] })
+      ], { stdio: ['inherit', 'pipe', 'inherit'] })
 
       const multiplexer = spawn(process.execPath, [
         './bin/eslint-multiplexer',
         '--nopipe',
         '-b'
-      ], { stdio: [ 'pipe', 'pipe', 'pipe' ] })
+      ], { stdio: ['pipe', 'pipe', 'pipe'] })
 
       multiplexer.stdin.setEncoding('utf8')
       eslint.stdout.pipe(multiplexer.stdin)
@@ -189,13 +189,13 @@ describe('cli', () => {
         './bin/eslint-multiplexer',
         'eslint',
         '--no-ignore', './test/fixtures/index.js'
-      ], { stdio: [ 'inherit', 'pipe', 'inherit' ] })
+      ], { stdio: ['inherit', 'pipe', 'inherit'] })
 
       const eslint2 = spawn(process.execPath, [
         './bin/eslint-multiplexer',
         'eslint',
         '--no-ignore', './test/fixtures/first/index.js'
-      ], { stdio: [ 'pipe', 'pipe', 'inherit' ] })
+      ], { stdio: ['pipe', 'pipe', 'inherit'] })
 
       eslint2.stdin.setEncoding('utf8')
       eslint1.stdout.pipe(eslint2.stdin)
@@ -204,7 +204,7 @@ describe('cli', () => {
         './bin/eslint-multiplexer',
         '--nopipe',
         '-b', '--debug'
-      ], { stdio: [ 'pipe', 'pipe', 'pipe' ] })
+      ], { stdio: ['pipe', 'pipe', 'pipe'] })
 
       multiplexer.stdin.setEncoding('utf8')
       eslint2.stdout.pipe(multiplexer.stdin)
