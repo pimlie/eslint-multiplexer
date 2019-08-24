@@ -33,7 +33,7 @@
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "lint": "eslint bin/* lib test",
-    "release": "npm run test && standard-version",
+    "release": "yarn test && standard-version",
     "test": "nyc jest test"
   },
   "engines": {
