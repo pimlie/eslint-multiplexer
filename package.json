@@ -42,22 +42,22 @@
   "dependencies": {
     "cross-spawn": "^6.0.5",
     "minimist": "^1.2.0",
-    "minimist-options": "^4.0.1"
+    "minimist-options": "^4.0.2"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.2",
-    "codecov": "^3.5.0",
-    "eslint": "^6.2.2",
-    "eslint-config-standard": "^14.0.1",
-    "eslint-config-standard-jsx": "^8.0.1",
+    "babel-eslint": "^10.0.3",
+    "codecov": "^3.6.1",
+    "eslint": "^6.6.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-config-standard-jsx": "^8.1.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^22.15.2",
-    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-jest": "^22.21.0",
+    "eslint-plugin-node": "^9.2.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-standard": "^4.0.1",
     "jest": "^24.9.0",
     "nyc": "^14.1.1",
-    "standard-version": "^7.0.0"
+    "standard-version": "^7.0.1"
   }
 }
