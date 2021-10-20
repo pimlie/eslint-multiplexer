@@ -37,7 +37,7 @@
     "test": "nyc jest test"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=v14.18.1"
   },
   "dependencies": {
     "cross-spawn": "^6.0.5",
